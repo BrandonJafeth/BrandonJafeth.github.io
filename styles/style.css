@@ -1,0 +1,51 @@
+
+
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1vh;
+    padding-bottom: 0.2vh;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    border: transparent;
+    border-top-left-radius: 2px; 
+    border-top-right-radius: 2px; 
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px;
+}
+
+
+
+header img {
+    width: 100%; 
+    height: auto; 
+    max-width: 128px; 
+    padding-top: 0.5;
+}
+
+
+header li{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3vh;
+    gap: 15px;
+    padding-right: 2%; 
+}
+
+
+header a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 1.5em;
+
+    padding: 1vh;
+}
+
+.hero{
+    margin-top: 5vh;
+}

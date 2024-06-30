@@ -8,16 +8,14 @@ html, body {
     padding: 0;
     font-family: "Poppins", sans-serif;
 }
+
 header {
     background-color: #47915D;
 }
 
-
-
 footer{
     background-color: #E2F4E7;
 }
-
 
 section {
     position: relative;

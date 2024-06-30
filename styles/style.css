@@ -19,15 +19,12 @@ header{
     border-bottom-right-radius: 20px;
 }
 
-
-
 header img {
     width: 100%; 
     height: auto; 
     max-width: 128px; 
     padding-top: 0.5vh;
 }
-
 
 header li{
     display: flex;
@@ -37,7 +34,6 @@ header li{
     padding-right: 2%; 
     font-weight: 500;
 }
-
 
 header a{
     text-decoration: none;
@@ -62,10 +58,6 @@ header li a:hover{
     padding: 30% 30% 28% 30%;
 }
 
-
-
-
-
 .hero img{
     position: absolute;
     width: 100%; 
@@ -76,8 +68,6 @@ header li a:hover{
     z-index: -1;
 
 }
-
-
 
 .container-hero{
   position: relative;

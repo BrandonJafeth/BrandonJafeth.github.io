@@ -70,10 +70,32 @@ header li a:hover{
 }
 
 .container-hero{
-  position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     display: flex;
     flex-direction: column;
-    margin: 15vh auto 0 auto;
+    margin-top: 10vh;
+    padding: 2% 55% 5% 4%;
+}
+
+
+.container-hero h1{
+ font-size: 43px;
+}
+
+
+.container-hero p{
+ font-size: 24px;
+
+}
+
+.container-hero button{
+    padding: 1%; 
+    padding-right: 0.5%; 
+    width: 20%;
+    height: 25%;
+    background-color: #359852;
+    border: transparent;
+    border-radius: 5px;
 }

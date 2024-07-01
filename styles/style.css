@@ -266,7 +266,7 @@ footer{
 
 .services {
     display: flex;
-    flex-wrap: wrap; /* Permite que los contenedores de tarjetas se ajusten en la siguiente fila si no hay espacio */
+    flex-wrap: wrap; 
     justify-content: center; 
 }
 

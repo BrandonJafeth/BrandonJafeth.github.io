@@ -87,42 +87,135 @@ nav a:hover {
     animation: fadeInUp 1s forwards;
 }
 
+/* reviews styles */
+.customer-reviews{
+    background-color: #235A33;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding-top: 4vh;
+}
 
-/* Estilos del footer */
+.reviews-title{
+    margin-top: 1vh;
+    font-size: xx-large;
+    margin-bottom: 6vh;
+}
+
+.customer-reviews img{
+    width:150px;
+    height:150px;
+    object-fit: cover;
+    border: solid #235A33;
+    border-width: 10px;
+    border-radius:100%;
+    margin: 0 auto 10px;
+    position: absolute;
+    top: -75px;
+}
+
+.reviews-container{
+    display: flex;
+    gap: 6vw;
+    margin: -2vh 17vw 16vh 17vw;
+    position: relative;
+}
+
+.customer-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #C8CACB;
+    color: #000000;
+    width: 20vw;
+    padding: 1.5vh 2.5vw 1.5vh 2.5vw;
+    position: relative;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 75px;
+}
+
+.reviews-container h3{
+    margin-top: 9vh;
+    margin-bottom: 0;
+}
+
+
+/* footer styles */
 
 footer{
     background-color: #e2f4e789;
     display: flex;
     flex-direction: row;
+    
+}
+
+.footer-icon{
+    width: 5vw;
+    margin: 6vh 7vw 0% ;
+}
+
+.footer-desc{
+    margin-left: 3vw;
+    margin-top: 0;
 }
 
 .useful-links{
     margin: 2% 6% 4%;
+    white-space: nowrap;
+    font-size: small;
 }
 
 .useful-links h2{
-    font-weight: 600;
+    font-weight: 500;
+    font-size: medium;
 }
 
 .help-support{
     margin: 2% 6% 4%;
+    white-space: nowrap;
+    font-size: small;
 }
 
 .help-support h2{
-    font-weight: 600;
+    font-weight: 500;
+    font-size: medium;
 }
 
 .contact-us{
-    margin: 2% 6% 4%;
+    margin: 2% 6% 0%;
+    font-size: small;
 }
 
-.contact-us h2{
+.contact-us h3{
     font-weight: 600;
+    font-size: medium;
 }
 
+.phone-icon{
+    width: 1.5vw;
+    
+}
 
+.phone{
+    display: flex;
+    align-items: center;
+}
 
+.email-icon{
+    width: 1.5vw;
+    margin-right: 0.2vw;
+}
 
+.email{
+    display: flex;
+    align-items: center;
+}
 
 @keyframes fadeInUp {
     from {
@@ -171,30 +264,71 @@ footer{
     text-decoration: none;
 }
 
+.services {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+}
 
 .services img {
     width: 256px;
-    height: 256px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 55px;
 }
 
-.services h1{
- text-align: center;
+.services h1 {
+    text-align: center;
+    font-size: 30px;
 }
 
-.card-container{
+.card-container {
     display: flex;
-  flex-direction: row;
-
-}
-
-.card{
+    flex-direction: column;
+    align-items: center;
+    margin: 2%; /* Margen responsivo */
     background-color: #235A32;
+    padding: 2%; /* Padding responsivo */
+    border-radius: 2px 2px 25px 20px;
+    flex-basis: 30%; /* Tamaño base flexível */
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    gap: 10%; 
+    justify-content: center; /* Centrar las tarjetas en el contenedor */
+}
+
+.card {
+    width: 100%;
+    text-align: center;
+}
+
+.description-container {
+    margin-top: 1rem; /* Margen superior responsivo */
+    color: #000;
+    width: 100%;
+    text-align: center;
+}
+
+.card-container h3 {
+    margin: 1rem 0; /* Margen responsivo */
+    color: #fff;
+    font-weight: 600;
+}
+
+.card-container p {
+    color: #fff;
+    font-weight: 450;
 }
 
 
 
 
-@media (max-width: 1000px) {
+
+@media (max-width: 1050px) {
 
     header{
         height: 12%;
@@ -229,6 +363,10 @@ footer{
         height: 10%;
         margin-right: 10%;
     }
+    .cards{
+        flex-wrap: wrap;
+    }
+    
 }
 
 @media (max-width: 733px) {
@@ -272,6 +410,11 @@ footer{
         height: 15%;
         margin-left: 15%;
         color: #fff;
+    }
+
+    
+    .cards{
+        flex-wrap: wrap;
     }
 }
 

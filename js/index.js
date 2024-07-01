@@ -10,7 +10,8 @@ function loadData() {
 function renderInfo(data) {
     renderHero(data);
     renderServices(data);
-    renderInfoFooter(data)
+    renderInfoFooter(data);
+    renderCustomerReviews(data);
 }
 
 
@@ -26,12 +27,10 @@ function renderHero(data) {
 
 // Esta función es para renderizar los servicios que se encuentran en el json 
 function renderServices(data) {
-  const servicesContainer = document.getElementById('card-container-id');
+  const servicesContainer = document.getElementById('cards-id');
   servicesContainer.innerHTML = ''; 
   data.services.forEach(service => {
-
       const cardContainer = document.createElement('div');
-      
       cardContainer.className = 'card-container';
 
       const card = document.createElement('div');
@@ -47,9 +46,6 @@ function renderServices(data) {
       card.appendChild(title);
       card.appendChild(image);
 
-      cardContainer.appendChild(card);
-
-
       const descriptionContainer = document.createElement('div');
       descriptionContainer.className = 'description-container';
 
@@ -58,14 +54,48 @@ function renderServices(data) {
 
       descriptionContainer.appendChild(description);
 
+      cardContainer.appendChild(card);
+      cardContainer.appendChild(descriptionContainer);
+
       servicesContainer.appendChild(cardContainer);
-      servicesContainer.appendChild(descriptionContainer);
   });
 }
 
+
+function renderCustomerReviews(data){
+  const reviewsContainer = document.getElementById('reviews-container-id');
+  reviewsContainer.innerHTML = '';
+  
+  data.customerReviews.forEach(customerReviews =>{
+    const card = document.createElement('div');
+    card.className = 'customer-card';
+
+    const img = document.createElement('img');
+    img.id = 'customer-img';
+    img.src = customerReviews.image;
+    img.alt = customerReviews.name;
+
+    const name = document.createElement('h3');
+    name.id = 'customer-name';
+    name.textContent = customerReviews.name;
+
+    const description = document.createElement('p');
+    description.id = 'review-description';
+    description.textContent = customerReviews.description;
+
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(description);
+
+    reviewsContainer.appendChild(card);
+  })
+}
+
+
 function renderInfoFooter(data){
-  document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
+  document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
+  document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
 }
 
 // Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina

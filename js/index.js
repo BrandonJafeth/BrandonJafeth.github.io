@@ -27,33 +27,38 @@ function renderHero(data) {
 
 // Esta función es para renderizar los servicios que se encuentran en el json 
 function renderServices(data) {
+  const servicesContainer = document.getElementById('cards-id');
+  servicesContainer.innerHTML = ''; 
+  data.services.forEach(service => {
+      const cardContainer = document.createElement('div');
+      cardContainer.className = 'card-container';
 
-    // Aqui las cosas son dinamicas que por la información que venga desde el json con el foreach se crean esos elementos
-    const servicesContainer = document.getElementById('card-container-id');
-    servicesContainer.innerHTML = ''; 
-    data.services.forEach(service => {
-        const card = document.createElement('div');
-        card.className = 'card';
+      const card = document.createElement('div');
+      card.className = 'card';
 
-        const title = document.createElement('h3');
-        title.id = 'card-title';
-        title.textContent = service.title;
+      const title = document.createElement('h3');
+      title.textContent = service.title;
 
-        const image = document.createElement('img');
-        image.id = 'card-img';
-        image.src = service.image;
-        image.alt = service.title;
+      const image = document.createElement('img');
+      image.src = service.image;
+      image.alt = service.title;
 
-        const description = document.createElement('p');
-        description.id = 'description-service';
-        description.textContent = service.description;
+      card.appendChild(title);
+      card.appendChild(image);
 
-        card.appendChild(title);
-        card.appendChild(image);
-        card.appendChild(description);
+      const descriptionContainer = document.createElement('div');
+      descriptionContainer.className = 'description-container';
 
-        servicesContainer.appendChild(card);
-    });
+      const description = document.createElement('p');
+      description.textContent = service.description;
+
+      descriptionContainer.appendChild(description);
+
+      cardContainer.appendChild(card);
+      cardContainer.appendChild(descriptionContainer);
+
+      servicesContainer.appendChild(cardContainer);
+  });
 }
 
 function renderGallery(data){
@@ -91,12 +96,10 @@ function renderCustomerReviews(data){
 
 
 function renderInfoFooter(data){
-  document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
   document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
   document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
 }
-
 
 // Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina
 document.addEventListener('DOMContentLoaded', function() {

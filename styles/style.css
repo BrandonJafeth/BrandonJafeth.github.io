@@ -58,6 +58,7 @@ header li a:hover{
     padding: 30% 30% 28% 30%;
 }
 
+
 .hero img{
     position: absolute;
     width: 100%; 
@@ -77,13 +78,28 @@ header li a:hover{
     flex-direction: column;
     margin-top: 10vh;
     padding: 3% 55% 5% 4%;
+    opacity: 0; /* Inicia los elementos en invisible */
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; 
 }
 
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 .container-hero h1{
  font-size: 43px;
  margin-bottom: 1.5vh;
  padding-left: 10%;
+
 }
 
 

@@ -87,6 +87,23 @@ nav a:hover {
     animation: fadeInUp 1s forwards;
 }
 
+/* gallery styles */
+.gallery-services{
+    background-color: #F2F3F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.gallery-title{
+    color: #235A32;
+    font-size: xx-large;
+}
+
+
+
 /* reviews styles */
 .customer-reviews{
     background-color: #235A33;
@@ -341,11 +358,11 @@ footer{
        height: 64px;
      width: 64px;
     }
+    
     .hero {
         padding: 30% 5%;
     }
     
-
     .container-hero {
         top: 10vh;
         left: 5%;
@@ -366,10 +383,10 @@ footer{
         height: 10%;
         margin-right: 10%;
     }
+
     .cards{
         flex-wrap: wrap;
     }
-    
 }
 
 @media (max-width: 733px) {
@@ -377,10 +394,10 @@ footer{
     header{
         border-radius: 2px 2px 6px 6px;
     }
+
     .hero {
         padding: 10% 2%;
     }
-
    
     .hero img{
         filter: blur(6px);
@@ -415,7 +432,6 @@ footer{
         color: #fff;
     }
 
-    
     .cards{
         flex-wrap: wrap;
     }

@@ -12,6 +12,7 @@ function renderInfo(data) {
     renderServices(data);
     renderInfoFooter(data);
     renderCustomerReviews(data);
+    renderGallery(data);
 }
 
 
@@ -62,7 +63,23 @@ function renderServices(data) {
 }
 
 function renderGallery(data){
-  
+  const galleryContent = data[0].pictures;
+  const galleryContainer = document.querySelector('.gallery-images')
+
+  if(galleryContent){
+    galleryContent.forEach((gallery)=>{
+      const galleryCard = document.createElement('div');
+      galleryCard.className('gallery-card');
+
+      const picture = document.createElement('img');
+      picture.src = gallery.image;
+      picture.id = 'gallery-img'
+
+      galleryCard.appendChild(picture);
+
+      galleryContainer.appendChild(galleryCard);
+    })
+  }
 }
 
 function renderCustomerReviews(data){
@@ -91,7 +108,7 @@ function renderCustomerReviews(data){
     card.appendChild(description);
 
     reviewsContainer.appendChild(card);
-  })
+  });
 }
 
 

@@ -5,6 +5,7 @@
       "description": "We are your trusted fruit store, offering fresh products carefully selected for the highest quality. In addition to providing the best fruits, we specialize in garnish services to enhance your dishes and natural drinks that will refresh your day. Come and experience the freshness in every bite!",
       "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/90ce88f733a869576490ad4d7052fce0c182fe1a/pexels-janetrangdoan-1128678%20(1).jpg"
     },
+
     "services": [
       {
         "title": "Garnishing",
@@ -22,6 +23,7 @@
         "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/90ce88f733a869576490ad4d7052fce0c182fe1a/pexels-ehioma-osih-109764575-10152736.jpg"
       }
     ],
+
     "gallery": [
       {
         "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/581bfafd610b55cd8af33468741fc8c5bb2dc40c/pexels-julia-nagy-568948-1327838.jpg"
@@ -33,6 +35,7 @@
         "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/5c4ee5aefc9617f9caeadfec8b1eac59a6d6c47e/pexels-cup-of-couple-7656388.jpg"
       }
     ],
+
     "customerReviews": [
       {
         "name": "Patricia Ramirez",
@@ -50,6 +53,7 @@
         "description": "This fruit store is a gem. The fruits are always fresh and delicious. The garnish service has been perfect for my family gatherings, and the natural drinks are exquisite and healthy. The staff is very friendly and always helpful. I'm delighted with everything they offer!"
       }
     ],
+    
     "footerInfo": {
       "description": "Agradecemos sinceramente tu visita a nuestro rincón visual. Cada imagen capturada cuenta una historia única, y estamos emocionados de compartirlas contigo. Gracias por ser parte de nuestra comunidad de amantes de la fotografía. Siéntete libre de explorar, inspirarte y, sobre todo, disfrutar de la belleza a través de nuestras lentes. ¡Gracias por tu apoyo y por compartir esta pasión por la fotografía!",
       "contactUs": {

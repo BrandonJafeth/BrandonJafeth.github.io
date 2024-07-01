@@ -56,6 +56,9 @@ function renderServices(data) {
     });
 }
 
+function renderGallery(data){
+  
+}
 
 function renderCustomerReviews(data){
   const reviewsContainer = document.getElementById('reviews-container-id');

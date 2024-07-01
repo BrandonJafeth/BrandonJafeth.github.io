@@ -140,6 +140,22 @@ nav a:hover {
     height: 256px;
 }
 
+.services h1{
+ text-align: center;
+}
+
+.card-container{
+    display: flex;
+  flex-direction: row;
+
+}
+
+.card{
+    background-color: #235A32;
+}
+
+
+
 
 @media (max-width: 1000px) {
 

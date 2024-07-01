@@ -27,35 +27,42 @@ function loadData() {
 
 // Esta función es para renderizar los servicios que se encuentran en el json 
 function renderServices(data) {
+  const servicesContainer = document.getElementById('card-container-id');
+  servicesContainer.innerHTML = ''; 
+  data.services.forEach(service => {
 
-    // Aqui las cosas son dinamicas que por la información que venga desde el json con el foreach se crean esos elementos
-    const servicesContainer = document.getElementById('card-container-id');
-    servicesContainer.innerHTML = ''; 
-    data.services.forEach(service => {
-        const card = document.createElement('div');
-        card.className = 'card';
+      const cardContainer = document.createElement('div');
+      
+      cardContainer.className = 'card-container';
 
-        const title = document.createElement('h3');
-        title.id = 'card-title';
-        title.textContent = service.title;
+      const card = document.createElement('div');
+      card.className = 'card';
 
-        const image = document.createElement('img');
-        image.id = 'card-img';
-        image.src = service.image;
-        image.alt = service.title;
+      const title = document.createElement('h3');
+      title.textContent = service.title;
 
-        const description = document.createElement('p');
-        description.id = 'description-service';
-        description.textContent = service.description;
+      const image = document.createElement('img');
+      image.src = service.image;
+      image.alt = service.title;
 
-        card.appendChild(title);
-        card.appendChild(image);
-        card.appendChild(description);
+      card.appendChild(title);
+      card.appendChild(image);
 
-        servicesContainer.appendChild(card);
-    });
+      cardContainer.appendChild(card);
+
+
+      const descriptionContainer = document.createElement('div');
+      descriptionContainer.className = 'description-container';
+
+      const description = document.createElement('p');
+      description.textContent = service.description;
+
+      descriptionContainer.appendChild(description);
+
+      servicesContainer.appendChild(cardContainer);
+      servicesContainer.appendChild(descriptionContainer);
+  });
 }
-
 
 
 

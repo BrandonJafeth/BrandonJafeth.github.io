@@ -76,18 +76,21 @@ header li a:hover{
     display: flex;
     flex-direction: column;
     margin-top: 10vh;
-    padding: 2% 55% 5% 4%;
+    padding: 3% 55% 5% 4%;
 }
 
 
 .container-hero h1{
  font-size: 43px;
+ margin-bottom: 1.5vh;
+ padding-left: 10%;
 }
 
 
 .container-hero p{
- font-size: 24px;
-
+ font-size: 26px;
+ margin-top: 0;
+ text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .container-hero button{
@@ -98,4 +101,6 @@ header li a:hover{
     background-color: #359852;
     border: transparent;
     border-radius: 5px;
+    font-size: 16px;
+     margin-left: 20%;
 }

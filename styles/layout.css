@@ -22,7 +22,8 @@ section {
 }
 
 .services{
- padding: 17vh;
+ padding: 4vh 50% 10%;
+ background-color: #70767a44;
 }
 .fade-in-section {
     opacity: 0;

@@ -26,12 +26,10 @@ function renderHero(data) {
 
 // Esta función es para renderizar los servicios que se encuentran en el json 
 function renderServices(data) {
-  const servicesContainer = document.getElementById('card-container-id');
+  const servicesContainer = document.getElementById('cards-id');
   servicesContainer.innerHTML = ''; 
   data.services.forEach(service => {
-
       const cardContainer = document.createElement('div');
-      
       cardContainer.className = 'card-container';
 
       const card = document.createElement('div');
@@ -47,9 +45,6 @@ function renderServices(data) {
       card.appendChild(title);
       card.appendChild(image);
 
-      cardContainer.appendChild(card);
-
-
       const descriptionContainer = document.createElement('div');
       descriptionContainer.className = 'description-container';
 
@@ -58,13 +53,14 @@ function renderServices(data) {
 
       descriptionContainer.appendChild(description);
 
+      cardContainer.appendChild(card);
+      cardContainer.appendChild(descriptionContainer);
+
       servicesContainer.appendChild(cardContainer);
-      servicesContainer.appendChild(descriptionContainer);
   });
 }
 
 function renderInfoFooter(data){
-  document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
 }
 

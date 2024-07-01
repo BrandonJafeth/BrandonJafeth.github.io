@@ -21,6 +21,9 @@ section {
     position: relative;
 }
 
+.services{
+ padding: 17vh;
+}
 .fade-in-section {
     opacity: 0;
     transform: translateY(30px);

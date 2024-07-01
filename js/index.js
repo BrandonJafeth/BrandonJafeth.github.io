@@ -27,6 +27,8 @@ function loadData() {
 
 // Esta función es para renderizar los servicios que se encuentran en el json 
 function renderServices(data) {
+
+    // Aqui las cosas son dinamicas que por la información que venga desde el json con el foreach se crean esos elementos
     const servicesContainer = document.getElementById('card-container-id');
     servicesContainer.innerHTML = ''; 
     data.services.forEach(service => {

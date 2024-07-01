@@ -94,3 +94,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const servicesButton = document.getElementById('aboutus-hero');
+        servicesButton.addEventListener('click', () => {
+          document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        const aboutUsLink = document.getElementById('about-us-link');
+        aboutUsLink.addEventListener('click', (e) => {
+          e.preventDefault(); 
+          document.getElementById('section-hero').scrollIntoView({ behavior: 'smooth' });
+        });
+      });

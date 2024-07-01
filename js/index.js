@@ -10,7 +10,8 @@ function loadData() {
 function renderInfo(data) {
     renderHero(data);
     renderServices(data);
-    renderInfoFooter(data)
+    renderInfoFooter(data);
+    renderCustomerReviews(data);
 }
 
 
@@ -55,9 +56,42 @@ function renderServices(data) {
     });
 }
 
+
+function renderCustomerReviews(data){
+  const reviewsContainer = document.getElementById('reviews-container-id');
+  reviewsContainer.innerHTML = '';
+  
+  data.customerReviews.forEach(customerReviews =>{
+    const card = document.createElement('div');
+    card.className = 'customer-card';
+
+    const img = document.createElement('img');
+    img.id = 'customer-img';
+    img.src = customerReviews.image;
+    img.alt = customerReviews.name;
+
+    const name = document.createElement('h3');
+    name.id = 'customer-name';
+    name.textContent = customerReviews.name;
+
+    const description = document.createElement('p');
+    description.id = 'review-description';
+    description.textContent = customerReviews.description;
+
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(description);
+
+    reviewsContainer.appendChild(card);
+  })
+}
+
+
 function renderInfoFooter(data){
   document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
+  document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
+  document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
 }
 
 

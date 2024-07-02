@@ -87,6 +87,60 @@ nav a:hover {
     animation: fadeInUp 1s forwards;
 }
 
+/* gallery styles */
+.gallery-services{
+    background-color: #F2F3F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-title{
+    color: #235A32;
+    font-size: xx-large;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.gallery-img-container{
+    display: flex;
+    flex-direction: row;
+    gap: 9vw;
+    margin-bottom: 10vh;
+}
+
+.gallery-img-container img{
+    display: flex;
+    width:360px;
+    height:436px;
+    object-fit: cover;
+    border: transparent;
+    border-radius: 13%;
+    transition: 1s ease;
+    box-shadow: 0px 2px 4px 0px #020202;
+}
+
+.gallery-img-container img:hover{
+    border: #000;
+    border-width: 1px;
+    box-shadow: 0 0 0 5px #235A33;
+    transition: .5s ease;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(1.1);
+    transition: 0.7s ease;
+}
+
+.gallery-card{
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
 /* reviews styles */
 .customer-reviews{
     background-color: #235A33;
@@ -114,7 +168,7 @@ nav a:hover {
     border-radius:100%;
     margin: 0 auto 10px;
     position: absolute;
-    top: -75px;
+    top: -100px;
 }
 
 .reviews-container{
@@ -216,6 +270,9 @@ footer{
     display: flex;
     align-items: center;
 }
+
+
+
 
 @keyframes fadeInUp {
     from {
@@ -338,11 +395,11 @@ footer{
        height: 64px;
      width: 64px;
     }
+    
     .hero {
         padding: 30% 5%;
     }
     
-
     .container-hero {
         top: 10vh;
         left: 5%;
@@ -363,10 +420,10 @@ footer{
         height: 10%;
         margin-right: 10%;
     }
+
     .cards{
         flex-wrap: wrap;
     }
-    
 }
 
 @media (max-width: 733px) {
@@ -374,10 +431,10 @@ footer{
     header{
         border-radius: 2px 2px 6px 6px;
     }
+
     .hero {
         padding: 10% 2%;
     }
-
    
     .hero img{
         filter: blur(6px);
@@ -412,7 +469,6 @@ footer{
         color: #fff;
     }
 
-    
     .cards{
         flex-wrap: wrap;
     }

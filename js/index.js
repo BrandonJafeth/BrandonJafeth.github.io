@@ -12,6 +12,7 @@ function renderInfo(data) {
     renderServices(data);
     renderInfoFooter(data);
     renderCustomerReviews(data);
+    renderGallery(data);
 }
 
 
@@ -61,6 +62,27 @@ function renderServices(data) {
   });
 }
 
+function renderGallery(data) {
+
+  const galleryContent = data.gallery;
+  const galleryContainer = document.querySelector('#gallery-img-container-id');
+
+  if (galleryContent && galleryContent.length > 0) {
+    galleryContent.forEach((galleryItem) => {
+      const galleryCard = document.createElement('div');
+      galleryCard.className = 'gallery-card';
+
+      const picture = document.createElement('img');
+      picture.src = galleryItem.image; 
+      picture.className = 'gallery-img';
+
+      galleryCard.appendChild(picture);
+      galleryContainer.appendChild(galleryCard);
+    });
+  } else {
+    console.log('No gallery found in data');
+  }
+}
 
 function renderCustomerReviews(data){
   const reviewsContainer = document.getElementById('reviews-container-id');
@@ -88,14 +110,16 @@ function renderCustomerReviews(data){
     card.appendChild(description);
 
     reviewsContainer.appendChild(card);
-  })
+  });
 }
 
 
 function renderInfoFooter(data){
+  document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
   document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
   document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
+
 }
 
 // Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina

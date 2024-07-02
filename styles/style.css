@@ -88,7 +88,7 @@ nav a:hover {
 }
 
 /* gallery styles */
-.gallery-services{
+.gallery-services {
     background-color: #F2F3F2;
     display: flex;
     flex-direction: column;
@@ -96,48 +96,76 @@ nav a:hover {
     justify-content: center;
 }
 
-.gallery-title{
+.gallery-title {
     color: #235A32;
-    font-size: xx-large;
+    font-size: 3vw; 
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
 
-.gallery-img-container{
-    display: flex;
-    flex-direction: row;
-    gap: 9vw;
+
+.gallery-wrapper {
+    position: relative;
+    width: 90%; 
+    min-height: 50vh; 
     margin-bottom: 10vh;
+    overflow: hidden; 
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center; 
 }
 
-.gallery-img-container img{
+.gallery-img-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.gallery-img-container img {
     width:360px;
     height:436px;
     object-fit: cover;
-    border: transparent;
     border-radius: 13%;
-    transition: 1s ease;
     box-shadow: 0px 2px 4px 0px #020202;
+    transition: transform 0.7s ease;
+    margin: 2vw;
+    transition: opacity 0.7s ease, transform 0.7s ease; /* Añade opacidad a la transición existente */
+    opacity: 1;
 }
 
-.gallery-img-container img:hover{
-    border: #000;
-    border-width: 1px;
+.gallery-img-container img:hover {
     box-shadow: 0 0 0 5px #235A33;
-    transition: .5s ease;
-    -webkit-transform: scale(0.8);
-    -ms-transform: scale(0.8);
     transform: scale(1.1);
-    transition: 0.7s ease;
 }
 
-.gallery-card{
+
+#prev, #next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+}
+
+#prev { left: 10px; }
+#next { right: 10px; }
+
+.gallery-card {
     justify-content: space-evenly;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%; 
+    margin: 0 auto; 
+    transition: opacity 0.7s ease; /* Asegúrate de que la transición de opacidad también se aplique al contenedor */
+    opacity: 1; /* Opacidad inicial */
 }
+
+
 
 
 

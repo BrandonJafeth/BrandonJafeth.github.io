@@ -115,9 +115,11 @@ function renderCustomerReviews(data){
 
 
 function renderInfoFooter(data){
+  document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
   document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
   document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
+
 }
 
 // Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina

@@ -62,23 +62,25 @@ function renderServices(data) {
   });
 }
 
-function renderGallery(data){
-  const galleryContent = data[0].pictures;
-  const galleryContainer = document.querySelector('.gallery-images')
+function renderGallery(data) {
 
-  if(galleryContent){
-    galleryContent.forEach((gallery)=>{
+  const galleryContent = data.gallery;
+  const galleryContainer = document.querySelector('#gallery-img-container-id');
+
+  if (galleryContent && galleryContent.length > 0) {
+    galleryContent.forEach((galleryItem) => {
       const galleryCard = document.createElement('div');
-      galleryCard.className('gallery-card');
+      galleryCard.className = 'gallery-card';
 
       const picture = document.createElement('img');
-      picture.src = gallery.image;
-      picture.id = 'gallery-img'
+      picture.src = galleryItem.image; 
+      picture.className = 'gallery-img';
 
       galleryCard.appendChild(picture);
-
       galleryContainer.appendChild(galleryCard);
-    })
+    });
+  } else {
+    console.log('No gallery found in data');
   }
 }
 

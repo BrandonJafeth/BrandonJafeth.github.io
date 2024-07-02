@@ -62,23 +62,68 @@ function renderServices(data) {
   });
 }
 
-function renderGallery(data) {
 
+function renderGallery(data) {
   const galleryContent = data.gallery;
   const galleryContainer = document.querySelector('#gallery-img-container-id');
+  galleryContainer.innerHTML = '';
 
   if (galleryContent && galleryContent.length > 0) {
-    galleryContent.forEach((galleryItem) => {
-      const galleryCard = document.createElement('div');
-      galleryCard.className = 'gallery-card';
+  
+    let currentIndexes = [0, 1, 2];
+    let autoChangeInterval;
 
-      const picture = document.createElement('img');
-      picture.src = galleryItem.image; 
-      picture.className = 'gallery-img';
+    const updateGallery = () => {
+   
+      const currentCards = galleryContainer.querySelectorAll('.gallery-card');
+      currentCards.forEach(card => card.style.opacity = '0');
+    
 
-      galleryCard.appendChild(picture);
-      galleryContainer.appendChild(galleryCard);
+      setTimeout(() => {
+        galleryContainer.innerHTML = '';
+        currentIndexes.forEach(index => {
+          const galleryCard = document.createElement('div');
+          galleryCard.className = 'gallery-card';
+          galleryCard.style.opacity = '0'; 
+    
+          const picture = document.createElement('img');
+          picture.src = galleryContent[index % galleryContent.length].image;
+          picture.className = 'gallery-img';
+    
+          galleryCard.appendChild(picture);
+          galleryContainer.appendChild(galleryCard);
+    
+    
+          setTimeout(() => galleryCard.style.opacity = '1', 10);
+        });
+      }, 600); 
+    };
+
+    const startAutoChange = () => {
+      if (autoChangeInterval) clearInterval(autoChangeInterval);
+      autoChangeInterval = setInterval(() => {
+        currentIndexes = currentIndexes.map(index => 
+          (index + 1) % galleryContent.length);
+        updateGallery();
+      }, 3000); 
+    };
+
+    document.querySelector('#prev').addEventListener('click', () => {
+      currentIndexes = currentIndexes.map(index => 
+        (index - 1 + galleryContent.length) % galleryContent.length);
+      updateGallery();
+      startAutoChange(); 
     });
+
+    document.querySelector('#next').addEventListener('click', () => {
+      currentIndexes = currentIndexes.map(index => 
+        (index + 1) % galleryContent.length);
+      updateGallery();
+      startAutoChange(); 
+    });
+
+    updateGallery();
+    startAutoChange(); 
   } else {
     console.log('No gallery found in data');
   }

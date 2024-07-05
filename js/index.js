@@ -1,154 +1,156 @@
-
 var UrlApi = 'http://localhost:3000';
 
-function getGallery() {
-  return fetch(`${UrlApi}/gallery`) 
+function fetchData(endpoint) {
+  return fetch(`${UrlApi}/${endpoint}`)
     .then(response => response.json())
-    .catch(error => console.error('Error loading the gallery:', error));
+    .catch(error => console.error(`Error loading ${endpoint}:`, error));
 }
 
-// Esto se llama fetch es para traer la información desde el link que se este llamando en este caso es el archivo json pero normalmente es de una API
 function loadData() {
-    return fetch('/data/BerryJerry.json')
-      .then(response => response.json())
-      .catch(error => console.error('Error loading the JSON:', error));
+  return Promise.all([
+    fetchData('hero'),
+    fetchData('services'),
+    fetchData('footer'),
+    fetchData('reviews'),
+    fetchData('gallery')
+  ]);
 }
 
-// Esta función es para renderizar la información que se trae desde el JSON que es donde van todas las demás funciones de render, aquí puedes introducir las tuyas
-function renderInfo(data) {
-    renderHero(data);
-    renderServices(data);
-    renderInfoFooter(data);
-    renderCustomerReviews(data);
+function renderInfo([heroData, servicesData, footerData, customerReviewsData, galleryData]) {
+  renderHero(heroData);
+  renderServices(servicesData);
+  renderInfoFooter(footerData);
+  renderCustomerReviews(customerReviewsData);
+  renderGallery(galleryData);
 }
 
-// Esta función es para renderizar el hero que es la parte de arriba de la página
-function renderHero(data) {
-    document.getElementById('BerryJerry-hero').textContent = data.hero.title;
-    document.getElementById('description-hero').textContent = data.hero.description;
-    document.getElementById('background-hero').src = data.hero.image;
-    document.getElementById('BerryJerry-icon-Id').src = data.iconImage;
-}
-
-// Esta función es para renderizar los servicios que se encuentran en el JSON
-function renderServices(data) {
-  const servicesContainer = document.getElementById('cards-id');
-  servicesContainer.innerHTML = ''; 
-  data.services.forEach(service => {
-      const cardContainer = document.createElement('div');
-      cardContainer.className = 'card-container';
-
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      const title = document.createElement('h3');
-      title.textContent = service.title;
-
-      const image = document.createElement('img');
-      image.src = service.image;
-      image.alt = service.title;
-
-      card.appendChild(title);
-      card.appendChild(image);
-
-      const descriptionContainer = document.createElement('div');
-      descriptionContainer.className = 'description-container';
-
-      const description = document.createElement('p');
-      description.textContent = service.description;
-
-      descriptionContainer.appendChild(description);
-
-      cardContainer.appendChild(card);
-      cardContainer.appendChild(descriptionContainer);
-
-      servicesContainer.appendChild(cardContainer);
+function renderHero(dataArray) {
+  dataArray.forEach(data => {
+    document.getElementById('BerryJerry-hero').textContent = data.titleHero;
+    document.getElementById('description-hero').textContent = data.descriptionHero;
+    document.getElementById('background-hero').src = data.imageHero;
+    document.getElementById('BerryJerry-icon-Id').src = data.iconBerry;
   });
 }
 
-function renderGallery() {
-  getGallery().then(galleryContent => {
-    const galleryContainer = document.querySelector('#gallery-img-container-id');
-    galleryContainer.innerHTML = '';
 
-    if (galleryContent && galleryContent.length > 0) {
-      let currentIndexes = [0, 1, 2];
-      let autoChangeInterval;
+function renderServices(data) {
+  const servicesContainer = document.getElementById('cards-id');
+  servicesContainer.innerHTML = '';
+  data.forEach(service => {
+    const cardContainer = document.createElement('div');
+    cardContainer.className = 'card-container';
 
-      const updateGallery = () => {
-        const currentCards = galleryContainer.querySelectorAll('.gallery-card');
-        currentCards.forEach(card => card.style.opacity = '0');
+    const card = document.createElement('div');
+    card.className = 'card';
 
-        setTimeout(() => {
-          galleryContainer.innerHTML = '';
-          currentIndexes.forEach(index => {
-            const galleryCard = document.createElement('div');
-            galleryCard.className = 'gallery-card';
-            galleryCard.style.opacity = '0'; 
+    const title = document.createElement('h3');
+    title.textContent = service.titleService;
 
-            const picture = document.createElement('img');
-            picture.src = galleryContent[index % galleryContent.length].url;
-            picture.className = 'gallery-img';
+    const image = document.createElement('img');
+    image.src = service.imageService;
+    image.alt = service.titleService;
 
-            galleryCard.appendChild(picture);
-            galleryContainer.appendChild(galleryCard);
+    card.appendChild(title);
+    card.appendChild(image);
 
-            setTimeout(() => galleryCard.style.opacity = '1', 10);
-          });
-        }, 600); 
-      };
+    const descriptionContainer = document.createElement('div');
+    descriptionContainer.className = 'description-container';
 
-      const startAutoChange = () => {
-        if (autoChangeInterval) clearInterval(autoChangeInterval);
-        autoChangeInterval = setInterval(() => {
-          currentIndexes = currentIndexes.map(index => 
-            (index + 1) % galleryContent.length);
-          updateGallery();
-        }, 3000); 
-      };
+    const description = document.createElement('p');
+    description.textContent = service.descriptionService;
 
-      document.querySelector('#prev').addEventListener('click', () => {
-        currentIndexes = currentIndexes.map(index => 
-          (index - 1 + galleryContent.length) % galleryContent.length);
-        updateGallery();
-        startAutoChange(); 
-      });
+    descriptionContainer.appendChild(description);
 
-      document.querySelector('#next').addEventListener('click', () => {
-        currentIndexes = currentIndexes.map(index => 
-          (index + 1) % galleryContent.length);
-        updateGallery();
-        startAutoChange(); 
-      });
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(descriptionContainer);
 
-      updateGallery();
-      startAutoChange(); 
-    } else {
-      console.log('No gallery found in data');
-    }
-  }).catch(error => console.error('Error loading the gallery from API:', error));
+    servicesContainer.appendChild(cardContainer);
+  });
 }
 
-function renderCustomerReviews(data){
+function renderGallery(dataArray) {
+  const galleryContainer = document.querySelector('#gallery-img-container-id');
+  galleryContainer.innerHTML = '';
+
+  if (dataArray && dataArray.length > 0) {
+    let currentIndexes = [0, 1, 2];
+    let autoChangeInterval;
+
+    const updateGallery = () => {
+      const currentCards = galleryContainer.querySelectorAll('.gallery-card');
+      currentCards.forEach(card => card.style.opacity = '0');
+
+      setTimeout(() => {
+        galleryContainer.innerHTML = '';
+        currentIndexes.forEach(index => {
+          const galleryCard = document.createElement('div');
+          galleryCard.className = 'gallery-card';
+          galleryCard.style.opacity = '0';
+
+          const picture = document.createElement('img');
+          picture.src = dataArray[index % dataArray.length].url;
+          picture.className = 'gallery-img';
+
+          galleryCard.appendChild(picture);
+          galleryContainer.appendChild(galleryCard);
+
+          setTimeout(() => galleryCard.style.opacity = '1', 10);
+        });
+      }, 600);
+    };
+
+    const startAutoChange = () => {
+      if (autoChangeInterval) clearInterval(autoChangeInterval);
+      autoChangeInterval = setInterval(() => {
+        currentIndexes = currentIndexes.map(index => 
+          (index + 1) % dataArray.length);
+        updateGallery();
+      }, 3000);
+    };
+
+    document.querySelector('#prev').addEventListener('click', () => {
+      currentIndexes = currentIndexes.map(index => 
+        (index - 1 + dataArray.length) % dataArray.length);
+      updateGallery();
+      startAutoChange();
+    });
+
+    document.querySelector('#next').addEventListener('click', () => {
+      currentIndexes = currentIndexes.map(index => 
+        (index + 1) % dataArray.length);
+      updateGallery();
+      startAutoChange();
+    });
+
+    updateGallery();
+    startAutoChange();
+  } else {
+    console.log('No gallery found in data');
+  }
+}
+
+
+function renderCustomerReviews(dataArray) {
   const reviewsContainer = document.getElementById('reviews-container-id');
   reviewsContainer.innerHTML = '';
-  
-  data.customerReviews.forEach(customerReviews =>{
+
+  dataArray.forEach(customerReview => {
     const card = document.createElement('div');
     card.className = 'customer-card';
 
     const img = document.createElement('img');
     img.id = 'customer-img';
-    img.src = customerReviews.image;
-    img.alt = customerReviews.name;
+    img.src = customerReview.customerImage;
+    img.alt = customerReview.customerName;
 
     const name = document.createElement('h3');
     name.id = 'customer-name';
-    name.textContent = customerReviews.name;
+    name.textContent = customerReview.customerName;
 
     const description = document.createElement('p');
     description.id = 'review-description';
-    description.textContent = customerReviews.description;
+    description.textContent = customerReview.customerDescription;
 
     card.appendChild(img);
     card.appendChild(name);
@@ -158,22 +160,24 @@ function renderCustomerReviews(data){
   });
 }
 
-function renderInfoFooter(data){
-  document.getElementById('footer-icon-id').src = data.iconImage;
-  document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
-  document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
-  document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
+
+function renderInfoFooter(dataArray) {
+  dataArray.forEach(data => {
+    document.getElementById('footer-icon-id').src = data.iconBerry;
+    document.getElementById('footer-desc-id').textContent = data.descriptionFooter;
+    document.getElementById('phone-number-id').textContent = data.phoneFooter;
+    document.getElementById('email-address-id').textContent = data.emailFooter;
+  });
 }
 
 // Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página
 document.addEventListener('DOMContentLoaded', function() {
     loadData().then(data => {
         renderInfo(data);
-        renderGallery();
     });
 });
 
-// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones 
+// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones
 const heroElements = document.querySelectorAll('.container-hero > *');
 heroElements.forEach((element, index) => {
   element.style.animationDelay = `${index * 0.8}s`;

@@ -1,23 +1,28 @@
- // Esto se llama fetch es para traer la información desde el link que se este llamando en este caso es el archivo json pero normalmente es de una api 
+
+var UrlApi = 'http://localhost:3000';
+
+function getGallery() {
+  return fetch(`${UrlApi}/gallery`) 
+    .then(response => response.json())
+    .catch(error => console.error('Error loading the gallery:', error));
+}
+
+// Esto se llama fetch es para traer la información desde el link que se este llamando en este caso es el archivo json pero normalmente es de una API
 function loadData() {
     return fetch('/data/BerryJerry.json')
       .then(response => response.json())
       .catch(error => console.error('Error loading the JSON:', error));
 }
 
-
-// Esta función es para renderizar la información que se trae desde el json que es donde van todas las demas funciones de render aqui puedes introducir las tuyas
+// Esta función es para renderizar la información que se trae desde el JSON que es donde van todas las demás funciones de render, aquí puedes introducir las tuyas
 function renderInfo(data) {
     renderHero(data);
     renderServices(data);
     renderInfoFooter(data);
     renderCustomerReviews(data);
-    renderGallery(data);
 }
 
-
-// Esta función es para renderizar el hero que es la parte de arriba de la pagina
-
+// Esta función es para renderizar el hero que es la parte de arriba de la página
 function renderHero(data) {
     document.getElementById('BerryJerry-hero').textContent = data.hero.title;
     document.getElementById('description-hero').textContent = data.hero.description;
@@ -25,8 +30,7 @@ function renderHero(data) {
     document.getElementById('BerryJerry-icon-Id').src = data.iconImage;
 }
 
-
-// Esta función es para renderizar los servicios que se encuentran en el json 
+// Esta función es para renderizar los servicios que se encuentran en el JSON
 function renderServices(data) {
   const servicesContainer = document.getElementById('cards-id');
   servicesContainer.innerHTML = ''; 
@@ -62,71 +66,67 @@ function renderServices(data) {
   });
 }
 
+function renderGallery() {
+  getGallery().then(galleryContent => {
+    const galleryContainer = document.querySelector('#gallery-img-container-id');
+    galleryContainer.innerHTML = '';
 
-function renderGallery(data) {
-  const galleryContent = data.gallery;
-  const galleryContainer = document.querySelector('#gallery-img-container-id');
-  galleryContainer.innerHTML = '';
+    if (galleryContent && galleryContent.length > 0) {
+      let currentIndexes = [0, 1, 2];
+      let autoChangeInterval;
 
-  if (galleryContent && galleryContent.length > 0) {
-  
-    let currentIndexes = [0, 1, 2];
-    let autoChangeInterval;
+      const updateGallery = () => {
+        const currentCards = galleryContainer.querySelectorAll('.gallery-card');
+        currentCards.forEach(card => card.style.opacity = '0');
 
-    const updateGallery = () => {
-   
-      const currentCards = galleryContainer.querySelectorAll('.gallery-card');
-      currentCards.forEach(card => card.style.opacity = '0');
-    
+        setTimeout(() => {
+          galleryContainer.innerHTML = '';
+          currentIndexes.forEach(index => {
+            const galleryCard = document.createElement('div');
+            galleryCard.className = 'gallery-card';
+            galleryCard.style.opacity = '0'; 
 
-      setTimeout(() => {
-        galleryContainer.innerHTML = '';
-        currentIndexes.forEach(index => {
-          const galleryCard = document.createElement('div');
-          galleryCard.className = 'gallery-card';
-          galleryCard.style.opacity = '0'; 
-    
-          const picture = document.createElement('img');
-          picture.src = galleryContent[index % galleryContent.length].image;
-          picture.className = 'gallery-img';
-    
-          galleryCard.appendChild(picture);
-          galleryContainer.appendChild(galleryCard);
-    
-    
-          setTimeout(() => galleryCard.style.opacity = '1', 10);
-        });
-      }, 600); 
-    };
+            const picture = document.createElement('img');
+            picture.src = galleryContent[index % galleryContent.length].url;
+            picture.className = 'gallery-img';
 
-    const startAutoChange = () => {
-      if (autoChangeInterval) clearInterval(autoChangeInterval);
-      autoChangeInterval = setInterval(() => {
+            galleryCard.appendChild(picture);
+            galleryContainer.appendChild(galleryCard);
+
+            setTimeout(() => galleryCard.style.opacity = '1', 10);
+          });
+        }, 600); 
+      };
+
+      const startAutoChange = () => {
+        if (autoChangeInterval) clearInterval(autoChangeInterval);
+        autoChangeInterval = setInterval(() => {
+          currentIndexes = currentIndexes.map(index => 
+            (index + 1) % galleryContent.length);
+          updateGallery();
+        }, 3000); 
+      };
+
+      document.querySelector('#prev').addEventListener('click', () => {
+        currentIndexes = currentIndexes.map(index => 
+          (index - 1 + galleryContent.length) % galleryContent.length);
+        updateGallery();
+        startAutoChange(); 
+      });
+
+      document.querySelector('#next').addEventListener('click', () => {
         currentIndexes = currentIndexes.map(index => 
           (index + 1) % galleryContent.length);
         updateGallery();
-      }, 3000); 
-    };
+        startAutoChange(); 
+      });
 
-    document.querySelector('#prev').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index => 
-        (index - 1 + galleryContent.length) % galleryContent.length);
       updateGallery();
       startAutoChange(); 
-    });
-
-    document.querySelector('#next').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index => 
-        (index + 1) % galleryContent.length);
-      updateGallery();
-      startAutoChange(); 
-    });
-
-    updateGallery();
-    startAutoChange(); 
-  } else {
-    console.log('No gallery found in data');
-  }
+    } else {
+      console.log('No gallery found in data');
+    }
+  }).catch(error => console.error('Error loading the gallery from API:', error));
 }
 
 function renderCustomerReviews(data){
@@ -158,33 +158,27 @@ function renderCustomerReviews(data){
   });
 }
 
-
 function renderInfoFooter(data){
   document.getElementById('footer-icon-id').src = data.iconImage;
   document.getElementById('footer-desc-id').textContent = data.footerInfo.description;
   document.getElementById('phone-number-id').textContent = data.footerInfo.contactUs.phone;
   document.getElementById('email-address-id').textContent = data.footerInfo.contactUs.email;
-
 }
 
-// Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina
+// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página
 document.addEventListener('DOMContentLoaded', function() {
     loadData().then(data => {
         renderInfo(data);
+        renderGallery();
     });
 });
 
-
-// Esta función es para que se ejecute el contenido de la pagina cuando se cargue el contenido de la pagina que son simples animaciones 
-
+// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones 
 const heroElements = document.querySelectorAll('.container-hero > *');
 heroElements.forEach((element, index) => {
-
   element.style.animationDelay = `${index * 0.8}s`;
   element.style.opacity = 1;
 });
-
-
 
 const fadeInSections = document.querySelectorAll('.fade-in-section');
 
@@ -203,14 +197,12 @@ const revealOnScroll = () => {
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const servicesButton = document.getElementById('aboutus-hero');
   servicesButton.addEventListener('click', () => {
     document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
   });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const aboutUsLink = document.getElementById('about-us-link');

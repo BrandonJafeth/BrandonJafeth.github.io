@@ -26,8 +26,7 @@ function renderInfo([heroData, servicesData, footerData, customerReviewsData, ga
 
 function renderHero(dataArray) {
   dataArray.forEach(data => {
-    document.getElementById('footer-icon-id').src = data.iconBerry;
-    document.getElementById('BerryJerry-hero').textContent = data.titleHero;
+    document.getElementById('BerryJerry-hero').src = data.titleHero;
     document.getElementById('description-hero').textContent = data.descriptionHero;
     document.getElementById('background-hero').src = data.imageHero;
     document.getElementById('BerryJerry-icon-Id').src = data.iconBerry;
@@ -164,6 +163,7 @@ function renderCustomerReviews(dataArray) {
 
 function renderInfoFooter(dataArray) {
   dataArray.forEach(data => {
+    document.getElementById('footer-icon-id').src = data.iconFooter;
     document.getElementById('footer-desc-id').textContent = data.descriptionFooter;
     document.getElementById('phone-number-id').textContent = data.phoneFooter;
     document.getElementById('email-address-id').textContent = data.emailFooter;

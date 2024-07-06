@@ -52,8 +52,9 @@ function renderServices(data) {
     image.src = service.imageService;
     image.alt = service.titleService;
 
-    card.appendChild(title);
     card.appendChild(image);
+    card.appendChild(title);
+    
 
     const descriptionContainer = document.createElement('div');
     descriptionContainer.className = 'description-container';

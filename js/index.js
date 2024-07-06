@@ -30,6 +30,7 @@ function renderHero(dataArray) {
     document.getElementById('description-hero').textContent = data.descriptionHero;
     document.getElementById('background-hero').src = data.imageHero;
     document.getElementById('BerryJerry-icon-Id').src = data.iconBerry;
+    document.getElementById('hero-background-png-id').src = data.heropng;
   });
 }
 

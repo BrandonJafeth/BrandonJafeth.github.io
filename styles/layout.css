@@ -10,7 +10,7 @@ html, body {
 }
 
 header {
-    background-color: #47915D;
+    background-color: #39B54A;
 }
 
 footer{
@@ -23,8 +23,9 @@ section {
 
 .services{
  padding: 4vh 50% 10%;
- background-color: #70767a44;
+ background-color: #FFFFFF;
 }
+
 .fade-in-section {
     opacity: 0;
     transform: translateY(30px);

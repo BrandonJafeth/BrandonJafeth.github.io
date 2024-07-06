@@ -1,9 +1,9 @@
 {
-    "iconImage": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/97ab960704a15bb7c4a7d49ed620af07d80d3d00/Icon.png",
+    "iconImage": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/25ebeb18218e966882ed059225c801ff7fb99367/Logos/Vector.png",
     "hero": {
-      "title": "BerryJerry",
+      "title": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/25ebeb18218e966882ed059225c801ff7fb99367/Logos/BerryJerryWhite.png",
       "description": "We are your trusted fruit store, offering fresh products carefully selected for the highest quality. In addition to providing the best fruits, we specialize in garnish services to enhance your dishes and natural drinks that will refresh your day. Come and experience the freshness in every bite!",
-      "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/90ce88f733a869576490ad4d7052fce0c182fe1a/pexels-janetrangdoan-1128678%20(1).jpg"
+      "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/e3e535e62b4b02ed9b7a7ed635b5f4228d313fec/HeroBackgrounds/HeroBackground.jpg"
     },
 
     "services": [
@@ -15,12 +15,12 @@
       {
         "title": "Fruit Sale",
         "description": "We offer a wide selection of fresh, high-quality fruits, carefully selected to ensure their flavor and freshness. Ideal for homes, restaurants, and businesses that value quality.",
-        "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/5c4ee5aefc9617f9caeadfec8b1eac59a6d6c47e/pexels-adri-ana-423950603-15201487.jpg"
+        "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/25ebeb18218e966882ed059225c801ff7fb99367/Services/PNG%20fruits.png"
       },
       {
         "title": "Natural drinks",
         "description": "Enjoy our natural drinks, made with fresh and healthy ingredients. Refresh your day with authentic and nutritious flavors, perfect for any occasion.",
-        "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/90ce88f733a869576490ad4d7052fce0c182fe1a/pexels-ehioma-osih-109764575-10152736.jpg"
+        "image": "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/25ebeb18218e966882ed059225c801ff7fb99367/Services/natural%20juice.png"
       }
     ],
 
@@ -61,10 +61,7 @@
         "phone": "+506 6069 4160",
         "email": "Karymd@gmail.com",
         "linkIcon": "link-icon"
-      },
-      "imagesPlus": [
-        "https://raw.githubusercontent.com/BrandonJafeth/Images-BerryJerry/90ce88f733a869576490ad4d7052fce0c182fe1a/pexels-janetrangdoan-1132047.jpg"
-      ]
+      }
     }
   }
   

@@ -56,6 +56,38 @@ nav a:hover {
     text-underline-offset: 3px;
 }
 
+.nav-toggle {
+    display: none; 
+    position: absolute;
+    right: 0; 
+    top: 10px; 
+    margin-right: 2vw; 
+    
+}
+
+
+.hamburger, .hamburger::before, .hamburger::after {
+    display: block;
+    background-color: black;
+    height: 2px;
+    width: 25px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.hamburger::before, .hamburger::after {
+    content: "";
+    position: absolute;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
 /* Estilos para el hero */
 .hero {
     height: 100vh;
@@ -535,11 +567,52 @@ footer{
     .gallery-title {
      font-size: 30px;
     }
+
+    .email-icon{
+        width: 5vw;
+        margin-right: 1vw;
+    }
+
+    .phone-icon{
+        width: 5vw;
+    }
     
 }
 
 @media (max-width: 733px) {
 
+    .nav-toggle {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 3vh;
+    }
+ 
+    header{
+        height: 9%;
+    }
+
+    header img {
+        margin-top: 1vh;
+        height: 64px;
+        width: 64px;
+    }
+    
+    nav ul {
+        display: none;
+        position: absolute;
+        background-color: #23a034;
+        right: 0;
+        top: 100%;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul.active {
+        display: flex;
+        
+    }
     header{
         border-radius: 2px 2px 6px 6px;
     }
@@ -549,9 +622,9 @@ footer{
     }
 
 
-    .container-hero h1 {
-        font-size: 28px;
-        color: #fff;
+    .container-hero-logo{
+        max-width: 40%;
+        max-height: 40%;
     }
 
     .container-hero p {
@@ -574,4 +647,17 @@ footer{
    flex-direction: column;
 
     }
+
+    .footer-icon{
+        width: 15vw;
+
+
+    }
+    
+    .hero-background-png {
+        height: 20vh;
+    }
 }
+
+  
+

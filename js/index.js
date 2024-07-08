@@ -241,3 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navUl = document.querySelector('nav ul');
+
+  navToggle.addEventListener('click', () => {
+      navUl.classList.toggle('active');
+  });
+});

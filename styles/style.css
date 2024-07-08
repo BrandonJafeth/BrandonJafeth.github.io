@@ -13,9 +13,9 @@ header {
 }
 
 header img {
-    width: 80px;
-    height: 80px;
-    padding-top: 3vh;
+    width: 64px;
+    height: 64px;
+    padding-top: .5vh;
 }
 
 nav {
@@ -42,7 +42,7 @@ nav a {
     white-space: nowrap;
     text-decoration: none;
     color: rgb(0, 0, 0);
-    font-size: 16px;
+    font-size: 14.5px;
     padding: 1vh;
     font-weight: 400;
     transition: text-decoration 0.5s ease;
@@ -58,31 +58,49 @@ nav a:hover {
 
 /* Estilos para el hero */
 .hero {
-    position: relative;
+    height: 100vh;
     display: flex;
-    margin-top: 12vh;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
     overflow: hidden;
-    padding: 30% 30% 28% 30%;
+    padding: 0 30% 1% 30%;
 }
 
-.hero img {
+.background-img-hero{
     position: absolute;
     width: 100%; 
-    height: 100%; 
+    height: 85vh; 
     object-fit: cover;
     top: 0;
     left: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 72, 55, 0.5);
     z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 25%, 0 83.3%);
 }
 
 .container-hero {
-    top: 8vh;
-    left: 4%;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    padding: 3% 55% 5% 0;
+    position: relative;
+    padding: 2% 5% 5% 5%;
     opacity: 0; 
     animation: fadeInUp 1s forwards;
+    margin-top: 0;
+    z-index: 1;
 }
 
 @keyframes fadeInUp {
@@ -96,41 +114,64 @@ nav a:hover {
     }
 }
 
-.container-hero img {
+.container-hero-logo {
+    margin-top: 20vh;
+    border: transparent;
     max-width: 20%;
     max-height: 40%;
     object-fit: cover;
-    margin-bottom: 2vh;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
 }
 
 .container-hero p {
-    font-size: 20px;
-    margin-top: 0;
+    font-size: 14px;
+    margin-top: -5%;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .container-hero button {
-    width: 27%;
-    height: 25%;
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
     background-color: #39B54A;
-    border: transparent;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-left: 20%;
-    margin-top: 3vh;
-    color: #000000;
-    font-weight: bold;
-    padding: 10px 20px;
-    box-shadow: -4px 5px 2px #000000;
-    transition: background-color 0.3s ease;
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+.container-hero button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transform-origin: center;
+    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
 }
 
 .container-hero button:hover {
-    background: #39B54A;
-    
-    text-decoration: none;
+    cursor: pointer;
+    color: #161616;
 }
 
+.container-hero button:hover::before {
+    transform: translate3d(180%, -100%, 0) scale3d(15, 15, 15);
+}
+
+.hero-background-png {
+    height: 56vh;
+}
 
 
 /* Services styles */
@@ -140,16 +181,11 @@ nav a:hover {
     justify-content: center; 
 }
 
-.services img {
-    width: 256px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 55px;
-}
-
 .services h1 {
     text-align: center;
     font-size: 30px;
+    color: #39B54A;
+    margin-top: 8vh;
 }
 
 .card-container {
@@ -157,43 +193,53 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     margin: 2%; 
-    background-color: #39B54A;
     padding: 2%; 
-    border-radius: 2px 2px 25px 20px;
     flex-basis: 30%; 
-    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 }
+
 
 .cards {
     display: flex;
     flex-direction: row;
-    gap: 10%; 
+    gap: 5%; 
     justify-content: center; 
-}
-
-.card {
-    width: 100%;
-    text-align: center;
-}
-
-.description-container {
-    margin-top: 1rem; 
-    color: #000;
-    width: 100%;
-    text-align: center;
+    padding: 20% 60% 60% 20%;
 }
 
 .card-container h3 {
-    margin: 1rem 0; 
-    color: #fff;
+    margin: 0;
+    color: #000000;
     font-weight: 600;
+    text-align: center;
+}
+
+.card-container img{
+    width: 256px;
+    height: 250px;
+    object-fit: contain;
+
 }
 
 .card-container p {
-    color: #fff;
-    font-weight: 450;
+    margin: 0;
+    color: #000;
+    width: 100%;
+    text-align: center;
+    font-weight: 300;
 }
 
+#last-card h3{
+    padding-top: 2%;
+}
+
+#last-card img{
+    width: 226px;
+    height: 250px;
+    
+
+
+
+}
 /* gallery styles */
 .gallery-services {
     background-color: #F1F1F1;
@@ -242,7 +288,6 @@ nav a:hover {
 }
 
 .gallery-img-container img:hover {
-    box-shadow: 0 0 0 5px #235A33;
     transform: scale(1.1);
 }
 
@@ -334,7 +379,60 @@ nav a:hover {
     margin-bottom: 0;
 }
 
+.reviews-container p{
+    font-size: 13px;
+}
 
+
+/* general animation */
+.text-focus-in {
+	-webkit-animation: text-focus-in 1.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2024-7-7 13:3:58
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation text-focus-in
+ * ----------------------------------------
+ */
+ @-webkit-keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  
 /* footer styles */
 
 footer{
@@ -352,48 +450,49 @@ footer{
 .footer-desc{
     margin-left: 3vw;
     margin-top: 0;
+    font-size: 14px;
 }
 
 .useful-links{
     margin: 2% 6% 4%;
     white-space: nowrap;
-    font-size: small;
+    font-size: 11px;
 }
 
 .useful-links h2{
     font-weight: 500;
-    font-size: medium;
+    font-size: 14.5px;
 }
 
 .help-support{
     margin: 2% 6% 4%;
     white-space: nowrap;
-    font-size: small;
+    font-size: 11px;
 }
 
 .help-support h2{
     font-weight: 500;
-    font-size: medium;
+    font-size: 14.5px;
 }
 
 .contact-us{
     margin: 2% 6% 0%;
-    font-size: small;
+    font-size: 11px;
 }
 
 .contact-us h3{
     font-weight: 600;
-    font-size: medium;
+    font-size: 14.5px;
 }
 
 .phone-icon{
     width: 1.5vw;
-    
 }
 
 .phone{
     display: flex;
     align-items: center;
+    font-size: 14.5px;
 }
 
 .email-icon{
@@ -404,6 +503,7 @@ footer{
 .email{
     display: flex;
     align-items: center;
+    font-size: 14.5px;
 }
 
 
@@ -422,30 +522,20 @@ footer{
         padding: 30% 5%;
     }
     
-    .container-hero {
-        top: 10vh;
-        left: 5%;
-        padding: 0% 15% 5% 0;
-     
-    }
-
-    .container-hero h1 {
-        font-size: 32px;
-    }
-
-    .container-hero p {
-        font-size: 18px;
-    }
-
-    .container-hero button {
-        width: 17%;
-        height: 10%;
-        margin-right: 10%;
-    }
 
     .cards{
         flex-wrap: wrap;
     }
+
+    footer{
+        flex-wrap: wrap;
+
+    }
+
+    .gallery-title {
+     font-size: 30px;
+    }
+    
 }
 
 @media (max-width: 733px) {
@@ -457,22 +547,7 @@ footer{
     .hero {
         padding: 10% 2%;
     }
-   
-    .hero img{
-        filter: blur(6px);
-    }
 
-    .container-hero {
-        position: relative; 
-        top: 0;
-        left: 0;
-        padding: 3% 10% 5% 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 15%;
-        margin-top: 0;
-    }
 
     .container-hero h1 {
         font-size: 28px;
@@ -494,10 +569,9 @@ footer{
     .cards{
         flex-wrap: wrap;
     }
-}
 
-@media (max-width: 370px) {
-    .container-hero button {
-        width: 50%; 
+    footer{
+   flex-direction: column;
+
     }
 }

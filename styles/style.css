@@ -542,7 +542,7 @@ footer{
 @media (max-width: 1050px) {
 
     header{
-        height: 12%;
+        height: 10%;
     }
 
     header img {
@@ -569,12 +569,12 @@ footer{
     }
 
     .email-icon{
-        width: 5vw;
+        width: 2vw;
         margin-right: 1vw;
     }
 
     .phone-icon{
-        width: 5vw;
+        width: 2vw;
     }
     
 }
@@ -590,7 +590,8 @@ footer{
     }
  
     header{
-        height: 9%;
+     
+        height: 11%;
     }
 
     header img {
@@ -611,7 +612,11 @@ footer{
 
     nav ul.active {
         display: flex;
-        
+     
+    }
+
+    nav li {
+     padding-left: 3vw;
     }
     header{
         border-radius: 2px 2px 6px 6px;
@@ -648,16 +653,27 @@ footer{
 
     }
 
+
     .footer-icon{
         width: 15vw;
 
-
     }
+
+
     
+    .email-icon{
+        width: 4vw;
+        margin-right: 1vw;
+    }
+
+    .phone-icon{
+        width: 4vw;
+    }
     .hero-background-png {
         height: 20vh;
     }
+
+    
 }
-
+    
   
-

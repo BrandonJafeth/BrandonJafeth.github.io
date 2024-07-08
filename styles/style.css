@@ -365,6 +365,26 @@ nav a:hover {
     padding-top: 4vh;
 }
 
+.reviews-decor-container{
+    position: absolute;
+    top: -42px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.reviews-decor{
+    width: 100px;
+    height: 100px;
+    border-radius: 0 70px;
+    background: rgb(37,159,53);
+    background: linear-gradient(53deg, rgba(37,159,53,1) 0%, rgba(67,190,84,1) 46%, rgba(37,159,53,1) 100%);
+    transform: rotate(49deg);
+}
+
+
 .reviews-title{
     margin-top: 1vh;
     font-size: xx-large;

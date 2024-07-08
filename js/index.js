@@ -160,6 +160,15 @@ function renderCustomerReviews(dataArray) {
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#reviews-leaf');
+  
+  for (let i = 0; i < 14; i++) { // Ajusta el número de elementos según sea necesario
+      const decorElement = document.createElement('div');
+      decorElement.classList.add('reviews-decor');
+      container.appendChild(decorElement);
+  }
+});
 
 function renderInfoFooter(dataArray) {
   dataArray.forEach(data => {

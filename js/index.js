@@ -34,16 +34,20 @@ function renderHero(dataArray) {
   });
 }
 
-
 function renderServices(data) {
   const servicesContainer = document.getElementById('cards-id');
   servicesContainer.innerHTML = '';
-  data.forEach(service => {
+  data.forEach((service, index) => {
     const cardContainer = document.createElement('div');
     cardContainer.className = 'card-container';
 
     const card = document.createElement('div');
     card.className = 'card';
+
+   
+    if (index === data.length - 1) {
+      card.id = 'last-card';
+    }
 
     const title = document.createElement('h3');
     title.textContent = service.titleService;
@@ -52,20 +56,14 @@ function renderServices(data) {
     image.src = service.imageService;
     image.alt = service.titleService;
 
-    card.appendChild(image);
-    card.appendChild(title);
-    
-
-    const descriptionContainer = document.createElement('div');
-    descriptionContainer.className = 'description-container';
-
     const description = document.createElement('p');
     description.textContent = service.descriptionService;
 
-    descriptionContainer.appendChild(description);
+    card.appendChild(image);
+    card.appendChild(title);
+    card.appendChild(description);
 
     cardContainer.appendChild(card);
-    cardContainer.appendChild(descriptionContainer);
 
     servicesContainer.appendChild(cardContainer);
   });
@@ -105,21 +103,21 @@ function renderGallery(dataArray) {
     const startAutoChange = () => {
       if (autoChangeInterval) clearInterval(autoChangeInterval);
       autoChangeInterval = setInterval(() => {
-        currentIndexes = currentIndexes.map(index => 
+        currentIndexes = currentIndexes.map(index =>
           (index + 1) % dataArray.length);
         updateGallery();
       }, 3000);
     };
 
     document.querySelector('#prev').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index => 
+      currentIndexes = currentIndexes.map(index =>
         (index - 1 + dataArray.length) % dataArray.length);
       updateGallery();
       startAutoChange();
     });
 
     document.querySelector('#next').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index => 
+      currentIndexes = currentIndexes.map(index =>
         (index + 1) % dataArray.length);
       updateGallery();
       startAutoChange();
@@ -173,16 +171,16 @@ function renderInfoFooter(dataArray) {
 }
 
 // Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página
-document.addEventListener('DOMContentLoaded', function() {
-    loadData().then(data => {
-        renderInfo(data);
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  loadData().then(data => {
+    renderInfo(data);
+  });
 });
 
 // Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones
 const heroElements = document.querySelectorAll('.container-hero > *');
 heroElements.forEach((element, index) => {
-  element.style.animationDelay = `${index * 0.8}s`;
+  element.style.animationDelay = `${index * 0.4}s`;
   element.style.opacity = 1;
 });
 
@@ -206,9 +204,34 @@ revealOnScroll();
 document.addEventListener('DOMContentLoaded', () => {
   const servicesButton = document.getElementById('aboutus-hero');
   servicesButton.addEventListener('click', () => {
-    document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
+    smoothScrollTo(document.getElementById('section-services'));
   });
 });
+
+function smoothScrollTo(targetElement) {
+  const targetPosition = targetElement.getBoundingClientRect().top;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  const duration = 800; // Duración de la animación en milisegundos
+  let startTime = null;
+
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const nextScrollPosition = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, nextScrollPosition);
+    if (timeElapsed < duration) requestAnimationFrame(animation);
+  }
+
+  function easeInOutQuad(t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return c / 2 * t * t + b;
+    t--;
+    return -c / 2 * (t * (t - 2) - 1) + b;
+  }
+
+  requestAnimationFrame(animation);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const aboutUsLink = document.getElementById('about-us-link');
@@ -217,3 +240,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('section-hero').scrollIntoView({ behavior: 'smooth' });
   });
 });
+

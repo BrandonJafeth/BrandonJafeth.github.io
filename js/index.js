@@ -248,8 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
   revealOnScroll();
 
   const servicesButton = document.getElementById('aboutus-hero-id');
-  servicesButton.addEventListener('click', () => {
-    smoothScrollTo(document.getElementById('section-services'));
+  servicesButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
   });
 
   const aboutUsLink = document.getElementById('about-us-link');

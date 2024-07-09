@@ -43,5 +43,8 @@ section {
         padding: 0;
         overflow-x: hidden; 
     }
-
+    .fade-in-section {
+        opacity: 1;
+        transform: none;
+      }
     }

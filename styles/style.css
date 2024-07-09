@@ -175,6 +175,7 @@ nav a:hover {
     background-color: #39B54A;
     overflow: hidden;
     transition: color 0.4s ease-in-out;
+    border-radius: 10px;
 }
 
 .container-hero button::before {
@@ -397,7 +398,8 @@ nav a:hover {
     justify-content: space-evenly;
     background-color: #C8CACB;
     color: #000000;
-    width: 20vw;
+    width: 80%;
+    max-width: 300px; 
     padding: 1.5vh 2.5vw 1.5vh 2.5vw;
     position: relative;
     text-align: center;
@@ -415,6 +417,20 @@ nav a:hover {
     font-size: 13px;
 }
 
+/* Botones de navegación */
+#prev-costumer, #next-costumer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+}
+
+#prev-costumer { left: 10px; }
+#next-costumer { right: 10px; }
 
 /* general animation */
 .text-focus-in {
@@ -550,14 +566,34 @@ footer{
      width: 64px;
     }
     
-    .hero {
-        padding: 30% 5%;
+
+    .container-hero-logo{
+        max-width: 40%;
+        max-height: 50%;
     }
-    
+
+    .hero-background-png {
+        height: 20vh;
+    }
 
     .cards{
         flex-wrap: wrap;
     }
+
+    .customer-card {
+        width: 100%;
+    }
+
+    .reviews-container {
+        flex-direction: column;
+        gap: 0;
+        margin-top: 5vh;
+    }
+
+    .customer-reviews {
+        padding: 2vh 0;
+    }
+
 
     footer{
         flex-wrap: wrap;
@@ -568,6 +604,7 @@ footer{
      font-size: 30px;
     }
 
+    
     .email-icon{
         width: 2vw;
         margin-right: 1vw;
@@ -587,6 +624,16 @@ footer{
         border: none;
         cursor: pointer;
         margin-top: 3vh;
+    }
+
+
+    .container-hero button::before {
+       
+        transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    }
+
+    .container-hero button:hover::before {
+        transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
     }
  
     header{
@@ -622,27 +669,13 @@ footer{
         border-radius: 2px 2px 6px 6px;
     }
 
-    .hero {
-        padding: 10% 2%;
-    }
 
 
-    .container-hero-logo{
-        max-width: 40%;
-        max-height: 40%;
-    }
 
     .container-hero p {
         font-size: 16px;
-        color: #fff;
     }
 
-    .container-hero button {
-        width: 37%;
-        height: 15%;
-        margin-left: 15%;
-        color: #fff;
-    }
 
     .cards{
         flex-wrap: wrap;
@@ -668,9 +701,6 @@ footer{
 
     .phone-icon{
         width: 4vw;
-    }
-    .hero-background-png {
-        height: 20vh;
     }
 
     

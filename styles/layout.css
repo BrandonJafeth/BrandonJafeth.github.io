@@ -7,7 +7,6 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
-    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -17,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 header {
     background-color: #23a034;
     box-shadow: -4px 3px 2px #00000044;
-        box-sizing: border-box; /* Añadido */
+    
 }
 
 footer{
@@ -33,7 +32,11 @@ section {
  background-color: #FFFFFF;
 }
 
-
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
   @media (max-width: 733px) {
     html, body {
         margin: 0;

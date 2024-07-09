@@ -149,7 +149,6 @@ function renderGallery(dataArray) {
     console.log('No gallery found in data');
   }
 }
-
 function renderCustomerReviews(dataArray) {
   const reviewsContainer = document.getElementById('reviews-container-id');
   reviewsContainer.innerHTML = '';
@@ -178,35 +177,44 @@ function renderCustomerReviews(dataArray) {
     reviewsContainer.appendChild(card);
   });
 
-  let currentReviewIndex = 0;
+  let currentReviewIndexes = [0, 1, 2];
   const cards = document.querySelectorAll('.customer-card');
   const totalCards = cards.length;
 
-  function showReviews(startIndex) {
+  function showReviews() {
     const screenWidth = window.innerWidth;
     const reviewsToShow = screenWidth <= 1235 ? 1 : 3;
 
     cards.forEach((card, index) => {
-      card.style.display = (index >= startIndex && index < startIndex + reviewsToShow) ? 'flex' : 'none';
+      card.style.display = 'none';
+    });
+
+    currentReviewIndexes.slice(0, reviewsToShow).forEach(index => {
+      if (index < totalCards) {
+        cards[index].style.display = 'flex';
+      }
     });
   }
 
-  showReviews(currentReviewIndex);
+  showReviews();
 
   document.getElementById('prev-costumer').addEventListener('click', () => {
-    currentReviewIndex = (currentReviewIndex > 0) ? currentReviewIndex - 1 : totalCards - 1;
-    showReviews(currentReviewIndex);
+    currentReviewIndexes = currentReviewIndexes.map(index => 
+      (index - 1 + totalCards) % totalCards
+    );
+    showReviews();
   });
 
   document.getElementById('next-costumer').addEventListener('click', () => {
-    currentReviewIndex = (currentReviewIndex < totalCards - 1) ? currentReviewIndex + 1 : 0;
-    showReviews(currentReviewIndex);
+    currentReviewIndexes = currentReviewIndexes.map(index => 
+      (index + 1) % totalCards
+    );
+    showReviews();
   });
 
-  window.addEventListener('resize', () => {
-    showReviews(currentReviewIndex);
-  });
+  window.addEventListener('resize', showReviews);
 }
+
 
 function renderInfoFooter(dataArray) {
   dataArray.forEach(data => {
@@ -248,10 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
   revealOnScroll();
 
   const servicesButton = document.getElementById('aboutus-hero-id');
-  servicesButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
-  });
+  if (servicesButton) {
+    servicesButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 
   const aboutUsLink = document.getElementById('about-us-link');
   aboutUsLink.addEventListener('click', (e) => {
@@ -265,5 +275,30 @@ document.addEventListener('DOMContentLoaded', () => {
   navToggle.addEventListener('click', () => {
     navUl.classList.toggle('active');
   });
+
+  function smoothScrollTo(targetElement) {
+    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 800;
+    let startTime = null;
+  
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const nextScrollPosition = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, nextScrollPosition);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+  
+    function easeInOutQuad(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+  
+    requestAnimationFrame(animation);
+  }
 });
 

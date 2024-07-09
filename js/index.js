@@ -44,7 +44,6 @@ function renderServices(data) {
     const card = document.createElement('div');
     card.className = 'card';
 
-   
     if (index === data.length - 1) {
       card.id = 'last-card';
     }
@@ -64,7 +63,6 @@ function renderServices(data) {
     card.appendChild(description);
 
     cardContainer.appendChild(card);
-
     servicesContainer.appendChild(cardContainer);
   });
 }
@@ -74,28 +72,41 @@ function renderGallery(dataArray) {
   galleryContainer.innerHTML = '';
 
   if (dataArray && dataArray.length > 0) {
-    let currentIndexes = [0, 1, 2];
     let autoChangeInterval;
 
+    const getScreenSizeIndexes = () => {
+      const screenWidth = window.innerWidth;
+      return screenWidth <= 1235 ? [0] : [0, 1, 2];
+    };
+
+    let currentIndexes = getScreenSizeIndexes();
+
     const updateGallery = () => {
+      const screenWidth = window.innerWidth;
+      const imagesToShow = screenWidth <= 1235 ? 1 : 3;
+
+      currentIndexes = currentIndexes.slice(0, imagesToShow);
+
       const currentCards = galleryContainer.querySelectorAll('.gallery-card');
       currentCards.forEach(card => card.style.opacity = '0');
 
       setTimeout(() => {
         galleryContainer.innerHTML = '';
         currentIndexes.forEach(index => {
-          const galleryCard = document.createElement('div');
-          galleryCard.className = 'gallery-card';
-          galleryCard.style.opacity = '0';
+          if (index < dataArray.length) {
+            const galleryCard = document.createElement('div');
+            galleryCard.className = 'gallery-card';
+            galleryCard.style.opacity = '0';
 
-          const picture = document.createElement('img');
-          picture.src = dataArray[index % dataArray.length].url;
-          picture.className = 'gallery-img';
+            const picture = document.createElement('img');
+            picture.src = dataArray[index % dataArray.length].url;
+            picture.className = 'gallery-img';
 
-          galleryCard.appendChild(picture);
-          galleryContainer.appendChild(galleryCard);
+            galleryCard.appendChild(picture);
+            galleryContainer.appendChild(galleryCard);
 
-          setTimeout(() => galleryCard.style.opacity = '1', 10);
+            setTimeout(() => galleryCard.style.opacity = '1', 10);
+          }
         });
       }, 600);
     };
@@ -110,26 +121,34 @@ function renderGallery(dataArray) {
     };
 
     document.querySelector('#prev').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index =>
-        (index - 1 + dataArray.length) % dataArray.length);
-      updateGallery();
-      startAutoChange();
+      if (dataArray.length > 2) {
+        currentIndexes = currentIndexes.map(index =>
+          (index - 1 + dataArray.length) % dataArray.length);
+        updateGallery();
+        startAutoChange();
+      }
     });
 
     document.querySelector('#next').addEventListener('click', () => {
-      currentIndexes = currentIndexes.map(index =>
-        (index + 1) % dataArray.length);
-      updateGallery();
-      startAutoChange();
+      if (dataArray.length > 2) {
+        currentIndexes = currentIndexes.map(index =>
+          (index + 1) % dataArray.length);
+        updateGallery();
+        startAutoChange();
+      }
     });
 
     updateGallery();
     startAutoChange();
+
+    window.addEventListener('resize', () => {
+      currentIndexes = getScreenSizeIndexes();
+      updateGallery();
+    });
   } else {
     console.log('No gallery found in data');
   }
 }
-
 
 function renderCustomerReviews(dataArray) {
   const reviewsContainer = document.getElementById('reviews-container-id');
@@ -158,8 +177,36 @@ function renderCustomerReviews(dataArray) {
 
     reviewsContainer.appendChild(card);
   });
-}
 
+  let currentReviewIndex = 0;
+  const cards = document.querySelectorAll('.customer-card');
+  const totalCards = cards.length;
+
+  function showReviews(startIndex) {
+    const screenWidth = window.innerWidth;
+    const reviewsToShow = screenWidth <= 1235 ? 1 : 3;
+
+    cards.forEach((card, index) => {
+      card.style.display = (index >= startIndex && index < startIndex + reviewsToShow) ? 'flex' : 'none';
+    });
+  }
+
+  showReviews(currentReviewIndex);
+
+  document.getElementById('prev-costumer').addEventListener('click', () => {
+    currentReviewIndex = (currentReviewIndex > 0) ? currentReviewIndex - 1 : totalCards - 1;
+    showReviews(currentReviewIndex);
+  });
+
+  document.getElementById('next-costumer').addEventListener('click', () => {
+    currentReviewIndex = (currentReviewIndex < totalCards - 1) ? currentReviewIndex + 1 : 0;
+    showReviews(currentReviewIndex);
+  });
+
+  window.addEventListener('resize', () => {
+    showReviews(currentReviewIndex);
+  });
+}
 
 function renderInfoFooter(dataArray) {
   dataArray.forEach(data => {
@@ -170,82 +217,53 @@ function renderInfoFooter(dataArray) {
   });
 }
 
-// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página
 document.addEventListener('DOMContentLoaded', function () {
   loadData().then(data => {
     renderInfo(data);
   });
 });
 
-// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones
-const heroElements = document.querySelectorAll('.container-hero > *');
-heroElements.forEach((element, index) => {
-  element.style.animationDelay = `${index * 0.4}s`;
-  element.style.opacity = 1;
-});
-
-const fadeInSections = document.querySelectorAll('.fade-in-section');
-
-const revealOnScroll = () => {
-  fadeInSections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const isVisible = sectionTop < window.innerHeight - 100;
-
-    if (isVisible) {
-      section.style.opacity = 1;
-      section.style.transform = 'translateY(0)';
-    }
-  });
-};
-
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll();
-
 document.addEventListener('DOMContentLoaded', () => {
-  const servicesButton = document.getElementById('aboutus-hero');
-  servicesButton.addEventListener('click', () => {
-    smoothScrollTo(document.getElementById('section-services'));
+  const heroElements = document.querySelectorAll('.container-hero > *');
+  heroElements.forEach((element, index) => {
+    element.style.animationDelay = `${index * 0.4}s`;
+    element.style.opacity = 1;
   });
-});
 
-function smoothScrollTo(targetElement) {
-  const targetPosition = targetElement.getBoundingClientRect().top;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  const duration = 800; // Duración de la animación en milisegundos
-  let startTime = null;
+  const fadeInSections = document.querySelectorAll('.fade-in-section');
 
-  function animation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const nextScrollPosition = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, nextScrollPosition);
-    if (timeElapsed < duration) requestAnimationFrame(animation);
-  }
+  const revealOnScroll = () => {
+    fadeInSections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const isVisible = sectionTop < window.innerHeight - 100;
 
-  function easeInOutQuad(t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
-    t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
-  }
+      if (isVisible) {
+        section.style.opacity = 1;
+        section.style.transform = 'translateY(0)';
+      }
+    });
+  };
 
-  requestAnimationFrame(animation);
-}
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
 
-document.addEventListener('DOMContentLoaded', () => {
+  const servicesButton = document.getElementById('aboutus-hero-id');
+  servicesButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
+  });
+
   const aboutUsLink = document.getElementById('about-us-link');
   aboutUsLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('section-hero').scrollIntoView({ behavior: 'smooth' });
   });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav-toggle');
   const navUl = document.querySelector('nav ul');
 
   navToggle.addEventListener('click', () => {
-      navUl.classList.toggle('active');
+    navUl.classList.toggle('active');
   });
 });
+

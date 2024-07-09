@@ -44,7 +44,6 @@ function renderServices(data) {
     const card = document.createElement('div');
     card.className = 'card';
 
-   
     if (index === data.length - 1) {
       card.id = 'last-card';
     }
@@ -64,10 +63,10 @@ function renderServices(data) {
     card.appendChild(description);
 
     cardContainer.appendChild(card);
-
     servicesContainer.appendChild(cardContainer);
   });
 }
+
 function renderGallery(dataArray) {
   const galleryContainer = document.querySelector('#gallery-img-container-id');
   galleryContainer.innerHTML = '';
@@ -151,71 +150,63 @@ function renderGallery(dataArray) {
   }
 }
 
-
-
-
 function renderCustomerReviews(dataArray) {
   const reviewsContainer = document.getElementById('reviews-container-id');
   reviewsContainer.innerHTML = '';
 
   dataArray.forEach(customerReview => {
-      const card = document.createElement('div');
-      card.className = 'customer-card';
+    const card = document.createElement('div');
+    card.className = 'customer-card';
 
-      const img = document.createElement('img');
-      img.id = 'customer-img';
-      img.src = customerReview.customerImage;
-      img.alt = customerReview.customerName;
+    const img = document.createElement('img');
+    img.id = 'customer-img';
+    img.src = customerReview.customerImage;
+    img.alt = customerReview.customerName;
 
-      const name = document.createElement('h3');
-      name.id = 'customer-name';
-      name.textContent = customerReview.customerName;
+    const name = document.createElement('h3');
+    name.id = 'customer-name';
+    name.textContent = customerReview.customerName;
 
-      const description = document.createElement('p');
-      description.id = 'review-description';
-      description.textContent = customerReview.customerDescription;
+    const description = document.createElement('p');
+    description.id = 'review-description';
+    description.textContent = customerReview.customerDescription;
 
-      card.appendChild(img);
-      card.appendChild(name);
-      card.appendChild(description);
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(description);
 
-      reviewsContainer.appendChild(card);
+    reviewsContainer.appendChild(card);
   });
-
 
   let currentReviewIndex = 0;
   const cards = document.querySelectorAll('.customer-card');
   const totalCards = cards.length;
 
   function showReviews(startIndex) {
-      const screenWidth = window.innerWidth;
-      const reviewsToShow = screenWidth <= 1235 ? 1 : 3;
+    const screenWidth = window.innerWidth;
+    const reviewsToShow = screenWidth <= 1235 ? 1 : 3;
 
-      cards.forEach((card, index) => {
-          card.style.display = (index >= startIndex && index < startIndex + reviewsToShow) ? 'flex' : 'none';
-      });
+    cards.forEach((card, index) => {
+      card.style.display = (index >= startIndex && index < startIndex + reviewsToShow) ? 'flex' : 'none';
+    });
   }
 
   showReviews(currentReviewIndex);
 
   document.getElementById('prev-costumer').addEventListener('click', () => {
-      currentReviewIndex = (currentReviewIndex > 0) ? currentReviewIndex - 1 : totalCards - 1;
-      showReviews(currentReviewIndex);
+    currentReviewIndex = (currentReviewIndex > 0) ? currentReviewIndex - 1 : totalCards - 1;
+    showReviews(currentReviewIndex);
   });
 
   document.getElementById('next-costumer').addEventListener('click', () => {
-      currentReviewIndex = (currentReviewIndex < totalCards - 1) ? currentReviewIndex + 1 : 0;
-      showReviews(currentReviewIndex);
+    currentReviewIndex = (currentReviewIndex < totalCards - 1) ? currentReviewIndex + 1 : 0;
+    showReviews(currentReviewIndex);
   });
 
   window.addEventListener('resize', () => {
-      showReviews(currentReviewIndex);
+    showReviews(currentReviewIndex);
   });
 }
-
-
-
-
 
 function renderInfoFooter(dataArray) {
   dataArray.forEach(data => {
@@ -226,82 +217,53 @@ function renderInfoFooter(dataArray) {
   });
 }
 
-// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página
 document.addEventListener('DOMContentLoaded', function () {
   loadData().then(data => {
     renderInfo(data);
   });
 });
 
-// Esta función es para que se ejecute el contenido de la página cuando se cargue el contenido de la página que son simples animaciones
-const heroElements = document.querySelectorAll('.container-hero > *');
-heroElements.forEach((element, index) => {
-  element.style.animationDelay = `${index * 0.4}s`;
-  element.style.opacity = 1;
-});
-
-const fadeInSections = document.querySelectorAll('.fade-in-section');
-
-const revealOnScroll = () => {
-  fadeInSections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const isVisible = sectionTop < window.innerHeight - 100;
-
-    if (isVisible) {
-      section.style.opacity = 1;
-      section.style.transform = 'translateY(0)';
-    }
-  });
-};
-
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll();
-
 document.addEventListener('DOMContentLoaded', () => {
+  const heroElements = document.querySelectorAll('.container-hero > *');
+  heroElements.forEach((element, index) => {
+    element.style.animationDelay = `${index * 0.4}s`;
+    element.style.opacity = 1;
+  });
+
+  const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+  const revealOnScroll = () => {
+    fadeInSections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const isVisible = sectionTop < window.innerHeight - 100;
+
+      if (isVisible) {
+        section.style.opacity = 1;
+        section.style.transform = 'translateY(0)';
+      }
+    });
+  };
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+
   const servicesButton = document.getElementById('aboutus-hero-id');
-  servicesButton.addEventListener('click', () => {
-    smoothScrollTo(document.getElementById('section-services'));
+  servicesButton.addEventListener('click', (e) => {
+    e.preventDefault
+    document.getElementById('section-services').scrollIntoView({ behavior: 'smooth' });
   });
-});
 
-function smoothScrollTo(targetElement) {
-  const targetPosition = targetElement.getBoundingClientRect().top;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  const duration = 800; 
-  let startTime = null;
-
-  function animation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const nextScrollPosition = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, nextScrollPosition);
-    if (timeElapsed < duration) requestAnimationFrame(animation);
-  }
-
-  function easeInOutQuad(t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
-    t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
-  }
-
-  requestAnimationFrame(animation);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
   const aboutUsLink = document.getElementById('about-us-link');
   aboutUsLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('section-hero').scrollIntoView({ behavior: 'smooth' });
   });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav-toggle');
   const navUl = document.querySelector('nav ul');
 
   navToggle.addEventListener('click', () => {
-      navUl.classList.toggle('active');
+    navUl.classList.toggle('active');
   });
 });
+

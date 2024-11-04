@@ -1,4 +1,4 @@
-var UrlApi = 'http://localhost:3000';
+var UrlApi = 'https://berryjerry-rest-api.onrender.com';
 
 function fetchData(endpoint) {
   return fetch(`${UrlApi}/${endpoint}`)

@@ -1,4 +1,4 @@
-var UrlApi = 'https://berryjerry-rest-api.onrender.com';
+var UrlApi = 'https://po4gg0gckcc4o8ssoow8co0g.nuestrasenora.me';
 
 function fetchData(endpoint) {
   return fetch(`${UrlApi}/${endpoint}`)
